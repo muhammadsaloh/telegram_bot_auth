@@ -1,0 +1,20 @@
+{
+  "name": "telegram",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node main.js",
+    "dev": "nodemon main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.7",
+    "node-telegram-bot-api": "^0.53.0",
+    "telebot": "^1.4.1",
+    "tesseract.js": "^2.1.4"
+  },
+  "description": ""
+}
