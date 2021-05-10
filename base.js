@@ -28,18 +28,10 @@ class Database {
                 unique: true,
                 index: true
             },
-            step: {
-                type: Number,
-                default: 1
-            },
-            name: {
+            text: {
                 type: String,
-                minlength: 3,
-                maxlength: 20
-            },
-            age: {
-                type: Number,
-                min: 16
+                trim: true,
+                maxlength: 1024
             }
         }))
     }
@@ -52,12 +44,8 @@ class Database {
         return await this.users.create({ chat_id: chat_id })
     }
 
-    async setName (chat_id, name) {
-        return await this.users.updateOne({ chat_id }, { name })
-    }
-
-    async setStep (chat_id, step) {
-        return await this.users.updateOne({ chat_id }, { step })
+    async setText (chat_id, text) {
+        return await this.users.updateOne({ chat_id }, { text })
     }
 }
 

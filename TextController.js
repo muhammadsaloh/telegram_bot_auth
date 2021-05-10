@@ -8,23 +8,37 @@ module.exports = async (message, bot, db) => {
 
     if(!user) {
         await db.createUser(chatId)
-        await bot.sendMessage(chatId, `Salom mehmon, xush kelibsiz, ismingizni kiriting!`)
-    } else if (user.step == 1) {
-        try {
-            await db.setName(chatId, text.trim())
-            await db.setStep(chatId, 2)
-            await bot.sendMessage(chatId, `Barakalla ${text}, endi yoshingizni kiriting`)
+        await bot.sendMessage(chatId, `So'zni kiriting!`)
+    } else {
+        const keyboard = {
+            inline_keyboard: [
+                [
+                    {
+                        text: "UZ",
+                        callback_data: "uz"
+                    },
+                    {
+                        text: "RU",
+                        callback_data: "ru"
+                    }
+                ],
+                [
+                    {
+                        text: "EN",
+                        callback_data: "en"
+                    },
+                    {
+                        text: "AR",
+                        callback_data: "ar"
+                    }
+                ]
+            ]
+        }
 
-        } catch (e) {
-            bot.sendMessage(chatId, `Qandaydir xato qildingiz`)
-        }
-    } else if (user.step == 2) {
-        try {
-            await db.setAge(chatId, Number(text))
-            await db.setStep(chatId, 3)
-            await bot.sendMessage(chatId, `Tanishganimdan xursandman. Siz ro'yxatdan o'tdingiz`)
-        } catch (e) {
-            bot.sendMessage(chatId, `Siz avval ro'yxatdan o'tgansiz!`)
-        }
+        await db.setText(chatId, text)
+
+        await bot.sendMessage(chatId, text, {
+            reply_markup: keyboard
+        })
     }
 }
